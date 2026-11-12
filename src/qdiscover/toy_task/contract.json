@@ -1,0 +1,10 @@
+{
+  "name": "toy-gf-inverse",
+  "field_polynomial": 11,
+  "width": 3,
+  "zero_inverse": 0,
+  "operation": "(x,y) -> (x,y XOR inverse_GF8(x))",
+  "phase": 0,
+  "num_tests": 512,
+  "failure_budget": 0
+}

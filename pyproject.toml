@@ -1,0 +1,75 @@
+[project]
+name = "quantum-circuit-discovering"
+version = "0.1.0"
+description = "Reproducible circuit evaluation and family-based evolutionary search for arXiv:2610.22367"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "Apache-2.0"
+dependencies = [
+  "galois>=0.4.11,<0.5",
+  "mpmath>=1.3,<2",
+  "numpy>=2.2,<3",
+]
+
+[project.scripts]
+qdiscover = "qdiscover.cli:main"
+
+[project.optional-dependencies]
+analysis = [
+    "matplotlib>=3.11.2",
+    "pandas>=3.1.1",
+]
+openevolve = [
+    "openevolve==0.4.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.13,<1", "pyright>=1.1.400,<2"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["qdiscover*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+qdiscover = [
+  "_vendor/**/*",
+  "specs/*.md",
+  "toy_task/*.json",
+]
+
+[tool.setuptools.exclude-package-data]
+qdiscover = [
+  "**/*.so", "**/*.dylib", "**/*.pyc", "**/__pycache__/*",
+  "**/.git", "**/.git/**", "**/.gitignore", "**/.python-version",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["src/qdiscover/_vendor"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pyright]
+include = ["src/qdiscover", "tests"]
+exclude = ["src/qdiscover/_vendor"]
+typeCheckingMode = "standard"
+pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"
+extraPaths = ["src/qdiscover/_vendor/uncompute"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "integration: executes author circuits and their independent graders",
+  "docker: requires the built Docker sandbox image and a running daemon",
+]
+

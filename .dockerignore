@@ -1,0 +1,23 @@
+# Only source and locked installation inputs enter the build context.
+**
+!Dockerfile
+!.dockerignore
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!NOTICE
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc
+**/*.so
+**/*.dylib
+**/*.egg-info/
+**/.cache/
+**/.env
+**/.env.*
+**/.aws/
+**/.ssh/
+**/.git/
+**/.git

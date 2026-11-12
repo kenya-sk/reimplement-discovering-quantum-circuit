@@ -1,0 +1,21 @@
+--- a/uncompute/_tapefast.py
++++ b/uncompute/_tapefast.py
+@@ -109,11 +109,13 @@
+                 i = idx.value
+                 if rows[i * 9] == _OBJ_ROW:
+                     item = objs[i]
+-                    if not tape._obj_is_reg(item):
+-                        if type(item) is tuple:
+-                            _c._encode_tuple_op(buf, item)
+-                        else:
+-                            _c._encode_op(buf, item, 0, table_ids)
++                    # Registers are stored separately by Builder._build_segments.
++                    # Every side-table item in a FLAT run is an operation,
++                    # matching the reference compact._write_flat path.
++                    if type(item) is tuple:
++                        _c._encode_tuple_op(buf, item)
++                    else:
++                        _c._encode_op(buf, item, 0, table_ids)
+                 else:
+                     _c._encode_tuple_op(buf, tape._get(i))
+                 idx.value = i + 1

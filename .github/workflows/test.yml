@@ -1,0 +1,24 @@
+name: checks
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.7.3"
+          enable-cache: true
+      - run: uv sync --locked --extra openevolve
+      - run: uv run --locked qdiscover upstream-setup
+      - run: uv run --locked qdiscover kernel
+      - run: uv run --locked qdiscover docker-build
+      - run: uv run --locked ruff format --check src tests
+      - run: uv run --locked ruff check src tests
+      - run: uv run --locked pyright
+      - run: uv run --locked pytest -m "not integration"
+      - run: uv run --locked pytest -m integration
+        env:
+          QDISCOVER_REQUIRE_DOCKER: "1"

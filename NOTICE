@@ -1,0 +1,13 @@
+Quantum circuit discovery reproduction
+
+This project references https://github.com/andigu/uncompute as a Git submodule at commit
+64b5a13aa249f1360846657392e6c66817b26d0f, by Andi Gu, Alek H. Kemeny,
+Susanne F. Yelin, and Mikhail D. Lukin, under the Apache License 2.0.
+
+Upstream sources, license, circuit-specific attribution notices, and proofs
+are fetched into src/qdiscover/_vendor/uncompute by qdiscover upstream-setup.
+Task specifications in
+src/qdiscover/specs are extracts from the upstream task README files.
+
+The reproduction commands, search reconstruction, independent divstep
+reference, toy task, tests, and project documentation were added here.

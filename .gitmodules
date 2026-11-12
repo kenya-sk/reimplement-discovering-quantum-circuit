@@ -1,0 +1,4 @@
+[submodule "uncompute"]
+	path = src/qdiscover/_vendor/uncompute
+	url = https://github.com/andigu/uncompute.git
+	ignore = dirty
